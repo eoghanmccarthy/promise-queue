@@ -29,6 +29,17 @@ export class PromiseQueue {
 
         try {
             let timeoutId;
+
+            // Promise.race takes an array of promises and returns a new promise
+            // that resolves or rejects as soon as the first promise in the array settles
+            // (either resolves or rejects).
+            //
+            // In this case, we're racing between:
+            // 1. The actual task (item.asyncFunction)
+            // 2. A timeout promise that only knows how to reject after a delay
+            //
+            // - If the task completes first: Promise.race resolves with the task's result
+            // - If the timeout happens first: Promise.race rejects with timeout error
             const result = await Promise.race([
                 item.asyncFunction(),
                 new Promise((_, reject) => {
