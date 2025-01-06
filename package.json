@@ -1,0 +1,7 @@
+{
+  "name": "promise-queue",
+  "version": "1.0.0",
+  "devDependencies": {
+    "bun-types": "^1.1.42"
+  }
+}
